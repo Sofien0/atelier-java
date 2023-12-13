@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>inscription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-right: 10px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 5px;
+        }
+        
+        section {
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        
+        footer {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>inscription</h2>
+        <form id="inscriptionForm">
+            <label for="prenom">prenom*</label>
+            <input type="text" id="prenom" name="prenom" minlength="3">
+            <small>Le prenom est obligatoire avec une longueur minimale de 3 caracteres</small>
+            <br><br>
+            
+            <label for="Nom">Nom</label>
+            <input type="text" name="Nom" id="Nom" minlength="3" required>
+            <small>Le nom est obligatoire avec une longueur minimale de 3 caracteres</small>
+            <br><br>
+           
+            <label for="Address">Address</label>
+            <input type="text" id="Address" name="Address">
+            <textarea name="Address" id="Address" cols="30" rows="1"></textarea>
+            <br><br>
+           
+            <label for="numero de telephone">numero de telephone</label>
+            <input type="number" id="numero" name="numero" pattern="[0-9]{8}">
+            <small>Le telephone est obligatoire et ne doit pas contenir des lettres</small>
+            <br><br>
+            
+            <label for="date de naissance">Date de naissance</label>
+            <input type="date">
+            <br><br>
+            
+            <label for="Email">Email</label>
+            <input type="email" placeholder="contact@exemple.com" name="email" required>
+            <small>L'email est obligatoire et doit avoir un format valide</small>
+            <br><br>
+            
+            <label for="mot de passe">mot de passe</label>
+            <input type="password" id="password1" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+            <small>le mot de passe devrait inclure une combinaison de minuscules, majuscules, chiffres et symboles</small>
+            <br><br>
+
+            <label for="confirmation mot de passe">Confirmation mot de passe</label>
+            <input type="password" id="password2" required>
+            <br><br>
+
+            <input type="submit" value="s'inscrire" onclick="passValidation()">
+            <input type="reset" value="reset">
+        </form>
+    </section>
+    <footer>
+        <section>
+            <h2>Contactez-nous</h2>
+            <p><a href="mailto:esprit@esprit.tn">esprit@esprit.tn</a></p>
+            <br>
+            <p>el ghazela,Ariana</p>
+            <br>
+        </section>
+    </footer>
+
+    <script>
+        function passValidation() {
+            var password1 = document.getElementById('password1').value;
+            var password2 = document.getElementById('password2').value;
+
+            if (password1 !== password2) {
+                alert("Les mots de passe ne correspondent pas.");
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            var nom = document.getElementById('Nom').value;
+            var prenom = document.getElementById('prenom').value;
+            var numero = document.getElementById('numero').value;
+            var password = document.getElementById('password1').value;
+
+            if (!/^[a-zA-Z]+$/.test(nom) || nom.length < 3) {
+                alert("Le nom doit contenir uniquement des lettres et avoir au moins 3 caractères.");
+                return;
+            }
+
+            if (prenom.length < 4) {
+                alert("Le prénom doit avoir au moins 4 caractères.");
+                return;
+            }
+
+            if (isNaN(numero) || numero.length !== 8) {
+                alert("Le numéro de téléphone ne doit contenir que des chiffres et doit avoir une longueur de 8 caractères.");
+                return;
+            }
+
+            if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}/.test(password)) {
+                alert("Le mot de passe doit contenir au moins 10 caractères, avec au moins une lettre majuscule, une lettre minuscule et un chiffre.");
+                return;
+            }
+
+            alert("Formulaire soumis avec succès!");
+        }
+
+        document.getElementById('inscriptionForm').addEventListener('submit', handleFormSubmit);
+    </script>
+</body>
+</html>
